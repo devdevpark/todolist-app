@@ -1,0 +1,41 @@
+{
+  "name": "todolist-backend",
+  "version": "1.0.0",
+  "description": "TodoList application backend API server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "lint": "eslint src/ server.js",
+    "lint:fix": "eslint src/ server.js --fix",
+    "format": "prettier --write .",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test:integration": "NODE_ENV=test node --experimental-vm-modules node_modules/.bin/jest --testPathPattern=tests/integration",
+    "db:migrate": "node src/db/migrate.js",
+    "db:seed": "node src/db/seeds/01_admin_user.js"
+  },
+  "keywords": [],
+  "author": "chpark",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^5.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.20.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.0.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  }
+}

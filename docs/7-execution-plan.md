@@ -111,18 +111,18 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1h | **의존성**: 없음
 
 #### 완료 조건
-- [ ] PostgreSQL 서비스가 정상 기동되고 `psql` 접속이 성공한다
-- [ ] `todolist_db` 데이터베이스가 생성되어 있다
-- [ ] 전용 DB 사용자가 `todolist_db`에 대한 접속 및 DDL 권한을 보유한다
-- [ ] `pgcrypto` 확장이 `todolist_db`에서 활성화된다
+- [x] PostgreSQL 서비스가 정상 기동되고 `psql` 접속이 성공한다
+- [x] `todolist_db` 데이터베이스가 생성되어 있다
+- [x] 전용 DB 사용자가 `todolist_db`에 대한 접속 및 DDL 권한을 보유한다
+- [x] `pgcrypto` 확장이 `todolist_db`에서 활성화된다
 
 #### 작업 항목
-- [ ] PostgreSQL 16 이상 설치 확인 (`psql --version`)
-- [ ] 전용 사용자 생성 (`CREATE USER todolist_user WITH PASSWORD '...'`)
-- [ ] `todolist_db` 데이터베이스 생성 (`CREATE DATABASE todolist_db OWNER todolist_user`)
-- [ ] `todolist_user`에 권한 부여 (`GRANT ALL PRIVILEGES ON DATABASE todolist_db TO todolist_user`)
-- [ ] `psql -U todolist_user -d todolist_db` 접속 성공 확인
-- [ ] 연결 정보를 `.env` 파일 초안에 기록
+- [x] PostgreSQL 16 이상 설치 확인 (`psql --version`)
+- [x] 전용 사용자 생성 (`CREATE USER todolist_user WITH PASSWORD '...'`)
+- [x] `todolist_db` 데이터베이스 생성 (`CREATE DATABASE todolist_db OWNER todolist_user`)
+- [x] `todolist_user`에 권한 부여 (`GRANT ALL PRIVILEGES ON DATABASE todolist_db TO todolist_user`)
+- [x] `psql -U todolist_user -d todolist_db` 접속 성공 확인
+- [x] 연결 정보를 `.env` 파일 초안에 기록
 
 ---
 
@@ -132,20 +132,20 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1h | **의존성**: DB-01
 
 #### 완료 조건
-- [ ] `users`, `categories`, `todos` 테이블 3개가 모두 생성된다
-- [ ] CHECK 제약조건이 ERD 명세와 일치한다 (`ADMIN|USER`, `PENDING|COMPLETED`, OVERDUE 미포함)
-- [ ] `categories → users` CASCADE 삭제, `todos → categories` SET NULL 동작이 검증된다
-- [ ] `trg_todos_updated_at` 트리거가 UPDATE 시 `updated_at`을 자동 갱신한다
-- [ ] 5개 인덱스가 모두 존재한다
+- [x] `users`, `categories`, `todos` 테이블 3개가 모두 생성된다
+- [x] CHECK 제약조건이 ERD 명세와 일치한다 (`ADMIN|USER`, `PENDING|COMPLETED`, OVERDUE 미포함)
+- [x] `categories → users` CASCADE 삭제, `todos → categories` SET NULL 동작이 검증된다
+- [x] `trg_todos_updated_at` 트리거가 UPDATE 시 `updated_at`을 자동 갱신한다
+- [x] 5개 인덱스가 모두 존재한다
 
 #### 작업 항목
-- [ ] `psql -U todolist_user -d todolist_db -f database/schema.sql` 실행
-- [ ] `\dt`로 3개 테이블 존재 확인
-- [ ] `\d users` / `\d categories` / `\d todos`로 컬럼 타입·제약조건 검증
-- [ ] FK ON DELETE CASCADE / SET NULL 동작 테스트
-- [ ] 트리거 동작 검증 (todos UPDATE 후 `updated_at` 변경 확인)
-- [ ] `\di`로 5개 인덱스 생성 확인
-- [ ] 테스트 데이터 삭제 (`TRUNCATE`)
+- [x] `psql -U todolist_user -d todolist_db -f database/schema.sql` 실행
+- [x] `\dt`로 3개 테이블 존재 확인
+- [x] `\d users` / `\d categories` / `\d todos`로 컬럼 타입·제약조건 검증
+- [x] FK ON DELETE CASCADE / SET NULL 동작 테스트
+- [x] 트리거 동작 검증 (todos UPDATE 후 `updated_at` 변경 확인)
+- [x] `\di`로 5개 인덱스 생성 확인
+- [x] 테스트 데이터 삭제 (`TRUNCATE`)
 
 ---
 
@@ -155,18 +155,18 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1.5h | **의존성**: DB-01, DB-02, DB-04
 
 #### 완료 조건
-- [ ] `npm run db:seed` 실행 시 admin 레코드가 1건 삽입된다
-- [ ] `users.password`에 bcrypt 해시값(`$2b$...`)이 저장되고 평문이 저장되지 않는다
-- [ ] 스크립트를 2회 이상 반복 실행해도 중복 생성되지 않는다 (멱등성 보장)
-- [ ] `bcrypt.compare('admin', storedHash)` 검증이 성공한다
+- [x] `npm run db:seed` 실행 시 admin 레코드가 1건 삽입된다
+- [x] `users.password`에 bcrypt 해시값(`$2b$...`)이 저장되고 평문이 저장되지 않는다
+- [x] 스크립트를 2회 이상 반복 실행해도 중복 생성되지 않는다 (멱등성 보장)
+- [x] `bcrypt.compare('admin', storedHash)` 검증이 성공한다
 
 #### 작업 항목
-- [ ] `backend/src/db/seeds/` 디렉토리 생성
-- [ ] `01_admin_user.js` 파일 생성
-- [ ] `SELECT id FROM users WHERE username = $1`로 존재 여부 확인 로직 작성
-- [ ] 미존재 시 `bcrypt.hash('admin', BCRYPT_SALT_ROUNDS)`로 해시 후 INSERT
-- [ ] `package.json` scripts에 `"db:seed"` 추가
-- [ ] 멱등성 테스트: 2회 실행 후 `COUNT(*) = 1` 확인
+- [x] `backend/src/db/seeds/` 디렉토리 생성
+- [x] `01_admin_user.js` 파일 생성
+- [x] `SELECT id FROM users WHERE username = $1`로 존재 여부 확인 로직 작성
+- [x] 미존재 시 `bcrypt.hash('admin', BCRYPT_SALT_ROUNDS)`로 해시 후 INSERT
+- [x] `package.json` scripts에 `"db:seed"` 추가
+- [x] 멱등성 테스트: 2회 실행 후 `COUNT(*) = 1` 확인
 
 ---
 
@@ -176,19 +176,19 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1.5h | **의존성**: DB-01
 
 #### 완료 조건
-- [ ] `backend/src/config/database.js`에서 Pool 인스턴스가 단일 생성되어 named export된다
-- [ ] DB 연결 정보가 모두 환경변수에서 주입된다
-- [ ] 필수 환경변수 누락 시 애플리케이션이 즉시 종료된다
-- [ ] `pool.query('SELECT NOW()')` 테스트 쿼리가 성공한다
-- [ ] DB 연결 문자열이 로그에 출력되지 않는다
+- [x] `backend/src/config/database.js`에서 Pool 인스턴스가 단일 생성되어 named export된다
+- [x] DB 연결 정보가 모두 환경변수에서 주입된다
+- [x] 필수 환경변수 누락 시 애플리케이션이 즉시 종료된다
+- [x] `pool.query('SELECT NOW()')` 테스트 쿼리가 성공한다
+- [x] DB 연결 문자열이 로그에 출력되지 않는다
 
 #### 작업 항목
-- [ ] `npm install pg` 실행
-- [ ] `src/config/database.js` 작성 (`pg.Pool` 생성, 환경변수 바인딩, named export)
-- [ ] 필수 환경변수 검증 로직 작성 (누락 시 `process.exit(1)`)
-- [ ] `.env`, `.env.example`에 DB 관련 환경변수 6개 설정
-- [ ] `pool.on('error', ...)` 이벤트 핸들러 등록
-- [ ] 연결 검증 후 DB 연결 정보 로그 미출력 확인
+- [x] `npm install pg` 실행
+- [x] `src/config/database.js` 작성 (`pg.Pool` 생성, 환경변수 바인딩, named export)
+- [x] 필수 환경변수 검증 로직 작성 (누락 시 `process.exit(1)`)
+- [x] `.env`, `.env.example`에 DB 관련 환경변수 6개 설정
+- [x] `pool.on('error', ...)` 이벤트 핸들러 등록
+- [x] 연결 검증 후 DB 연결 정보 로그 미출력 확인
 
 ---
 
@@ -198,18 +198,18 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 중간 | **예상 소요**: 2h | **의존성**: DB-02, DB-04
 
 #### 완료 조건
-- [ ] `backend/src/db/migrations/`에 번호 prefix 파일 4개 이상이 존재한다
-- [ ] `npm run db:migrate` 실행 시 오류 없이 스키마 전체가 적용된다
-- [ ] 재실행 시 `IF NOT EXISTS`로 오류가 발생하지 않는다
+- [x] `backend/src/db/migrations/`에 번호 prefix 파일 4개 이상이 존재한다
+- [x] `npm run db:migrate` 실행 시 오류 없이 스키마 전체가 적용된다
+- [x] 재실행 시 `IF NOT EXISTS`로 오류가 발생하지 않는다
 
 #### 작업 항목
-- [ ] `001_create_users.sql` 작성 (pgcrypto 확장, users DDL)
-- [ ] `002_create_categories.sql` 작성 (categories DDL, 인덱스)
-- [ ] `003_create_todos.sql` 작성 (todos DDL, 인덱스 3개)
-- [ ] `004_create_triggers.sql` 작성 (set_updated_at 함수, 트리거)
-- [ ] `src/db/migrate.js` 작성 (순번 기준 정렬 후 순차 실행)
-- [ ] `package.json`에 `"db:migrate"` 스크립트 추가
-- [ ] DROP 후 마이그레이션만으로 재생성 성공 확인
+- [x] `001_create_users.sql` 작성 (pgcrypto 확장, users DDL)
+- [x] `002_create_categories.sql` 작성 (categories DDL, 인덱스)
+- [x] `003_create_todos.sql` 작성 (todos DDL, 인덱스 3개)
+- [x] `004_create_triggers.sql` 작성 (set_updated_at 함수, 트리거)
+- [x] `src/db/migrate.js` 작성 (순번 기준 정렬 후 순차 실행)
+- [x] `package.json`에 `"db:migrate"` 스크립트 추가
+- [x] DROP 후 마이그레이션만으로 재생성 성공 확인
 
 ---
 
@@ -219,17 +219,17 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 중간 | **예상 소요**: 1.5h | **의존성**: DB-02, DB-03
 
 #### 완료 조건
-- [ ] `WHERE user_id = $1` 쿼리에서 `idx_todos_user_id` 인덱스 스캔이 확인된다
-- [ ] OVERDUE 판별 쿼리에서 `idx_todos_status_due` 복합 인덱스가 활용된다
-- [ ] `uq_users_username` UNIQUE 인덱스가 중복 삽입 시 오류를 발생시킨다
-- [ ] `uq_categories_user_name` 복합 UNIQUE가 사용자 내 중복만 차단한다
+- [x] `WHERE user_id = $1` 쿼리에서 `idx_todos_user_id` 인덱스 스캔이 확인된다
+- [x] OVERDUE 판별 쿼리에서 `idx_todos_status_due` 복합 인덱스가 활용된다
+- [x] `uq_users_username` UNIQUE 인덱스가 중복 삽입 시 오류를 발생시킨다
+- [x] `uq_categories_user_name` 복합 UNIQUE가 사용자 내 중복만 차단한다
 
 #### 작업 항목
-- [ ] 검증용 더미 데이터 삽입 (user 1건, categories 3건, todos 10건 이상)
-- [ ] `EXPLAIN ANALYZE`로 주요 쿼리 4종 실행 및 인덱스 스캔 확인
-- [ ] UNIQUE 제약조건 위반 테스트 2건
-- [ ] `ANALYZE` 실행으로 통계 정보 갱신
-- [ ] 더미 데이터 정리 (`TRUNCATE users CASCADE`)
+- [x] 검증용 더미 데이터 삽입 (user 1건, categories 3건, todos 10건 이상)
+- [x] `EXPLAIN ANALYZE`로 주요 쿼리 4종 실행 및 인덱스 스캔 확인
+- [x] UNIQUE 제약조건 위반 테스트 2건
+- [x] `ANALYZE` 실행으로 통계 정보 갱신
+- [x] 더미 데이터 정리 (`TRUNCATE users CASCADE`)
 
 ---
 
@@ -243,22 +243,22 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 2h | **의존성**: 없음
 
 #### 완료 조건
-- [ ] `npm run dev`로 서버가 정상 기동된다
-- [ ] ESLint 및 Prettier 검사가 오류 없이 통과된다
-- [ ] `.env.example`에 모든 필수 환경변수가 문서화된다
-- [ ] `app.js`(앱 설정)와 `server.js`(포트 바인딩)가 분리된다
-- [ ] `GET /health` 요청 시 `{ success: true, data: { status: "ok" } }` 반환된다
+- [x] `npm run dev`로 서버가 정상 기동된다
+- [x] ESLint 및 Prettier 검사가 오류 없이 통과된다
+- [x] `.env.example`에 모든 필수 환경변수가 문서화된다
+- [x] `app.js`(앱 설정)와 `server.js`(포트 바인딩)가 분리된다
+- [x] `GET /health` 요청 시 `{ success: true, data: { status: "ok" } }` 반환된다
 
 #### 작업 항목
-- [ ] `backend/` 하위 전체 폴더 구조 생성 (`src/config`, `routes`, `controllers`, `services`, `repositories`, `middlewares`, `utils`, `constants`, `db/migrations`, `db/seeds`)
-- [ ] `package.json` 작성 (`"type": "module"`, Express 5, pg, jsonwebtoken, bcrypt, dotenv, cors 의존성)
-- [ ] 개발 의존성 추가 (nodemon, eslint, prettier, jest, supertest)
-- [ ] `npm run dev`, `start`, `lint`, `test` 스크립트 정의
-- [ ] `.eslintrc.json` 작성 (`no-unused-vars: error`, `no-console: warn`, `eqeqeq: error`)
-- [ ] `.prettierrc` 작성 (2칸 들여쓰기, 세미콜론 필수, 작은따옴표, 100자)
-- [ ] `.env.example` 작성 (PORT, NODE_ENV, DB_*, JWT_*, BCRYPT_SALT_ROUNDS, CORS_ORIGIN)
-- [ ] `src/app.js` 작성 (Express 인스턴스, CORS, express.json(), `listen` 호출 금지)
-- [ ] `server.js` 작성 (app.listen, SIGTERM 처리)
+- [x] `backend/` 하위 전체 폴더 구조 생성 (`src/config`, `routes`, `controllers`, `services`, `repositories`, `middlewares`, `utils`, `constants`, `db/migrations`, `db/seeds`)
+- [x] `package.json` 작성 (`"type": "module"`, Express 5, pg, jsonwebtoken, bcrypt, dotenv, cors 의존성)
+- [x] 개발 의존성 추가 (nodemon, eslint, prettier, jest, supertest)
+- [x] `npm run dev`, `start`, `lint`, `test` 스크립트 정의
+- [x] `.eslintrc.json` 작성 (`no-unused-vars: error`, `no-console: warn`, `eqeqeq: error`)
+- [x] `.prettierrc` 작성 (2칸 들여쓰기, 세미콜론 필수, 작은따옴표, 100자)
+- [x] `.env.example` 작성 (PORT, NODE_ENV, DB_*, JWT_*, BCRYPT_SALT_ROUNDS, CORS_ORIGIN)
+- [x] `src/app.js` 작성 (Express 인스턴스, CORS, express.json(), `listen` 호출 금지)
+- [x] `server.js` 작성 (app.listen, SIGTERM 처리)
 
 ---
 
@@ -268,20 +268,20 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 2h | **의존성**: BE-01
 
 #### 완료 조건
-- [ ] `TODO_STATUS`, `USER_ROLE`, `ERROR_CODES` 상수가 UPPER_SNAKE_CASE named export된다
-- [ ] `jwt-utils.js`의 `signToken()`, `verifyToken()`이 HS-512 알고리즘을 사용한다
-- [ ] `password-utils.js`의 `hashPassword()`, `comparePassword()`가 bcrypt를 사용한다
-- [ ] `date-utils.js`의 `isOverdue()`가 `due_date < now() AND status = 'PENDING'` 조건을 정확히 판별한다
-- [ ] 모든 유틸 함수가 Express `req`, `res` 의존성 없는 순수 함수이다
+- [x] `TODO_STATUS`, `USER_ROLE`, `ERROR_CODES` 상수가 UPPER_SNAKE_CASE named export된다
+- [x] `jwt-utils.js`의 `signToken()`, `verifyToken()`이 HS-512 알고리즘을 사용한다
+- [x] `password-utils.js`의 `hashPassword()`, `comparePassword()`가 bcrypt를 사용한다
+- [x] `date-utils.js`의 `isOverdue()`가 `due_date < now() AND status = 'PENDING'` 조건을 정확히 판별한다
+- [x] 모든 유틸 함수가 Express `req`, `res` 의존성 없는 순수 함수이다
 
 #### 작업 항목
-- [ ] `src/constants/todo-status.js` 작성 (`PENDING`, `COMPLETED`, `OVERDUE`)
-- [ ] `src/constants/user-role.js` 작성 (`ADMIN`, `USER`)
-- [ ] `src/constants/error-codes.js` 작성 (UNAUTHORIZED, FORBIDDEN, NOT_FOUND, CONFLICT 등)
-- [ ] `src/utils/jwt-utils.js` 작성 (`signToken`, `verifyToken` — HS512, 만료시간 환경변수)
-- [ ] `src/utils/password-utils.js` 작성 (`hashPassword`, `comparePassword`)
-- [ ] `src/utils/date-utils.js` 작성 (`isOverdue(dueDate, status)`)
-- [ ] `src/utils/response-utils.js` 작성 (`successResponse`, `errorResponse` 헬퍼)
+- [x] `src/constants/todo-status.js` 작성 (`PENDING`, `COMPLETED`, `OVERDUE`)
+- [x] `src/constants/user-role.js` 작성 (`ADMIN`, `USER`)
+- [x] `src/constants/error-codes.js` 작성 (UNAUTHORIZED, FORBIDDEN, NOT_FOUND, CONFLICT 등)
+- [x] `src/utils/jwt-utils.js` 작성 (`signToken`, `verifyToken` — HS512, 만료시간 환경변수)
+- [x] `src/utils/password-utils.js` 작성 (`hashPassword`, `comparePassword`)
+- [x] `src/utils/date-utils.js` 작성 (`isOverdue(dueDate, status)`)
+- [x] `src/utils/response-utils.js` 작성 (`successResponse`, `errorResponse` 헬퍼)
 
 ---
 
@@ -291,15 +291,15 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1h | **의존성**: BE-01, DB-01
 
 #### 완료 조건
-- [ ] `src/config/database.js`에서 Pool 인스턴스가 단일 생성되어 named export된다
-- [ ] 필수 환경변수 누락 시 서버 기동이 중단된다
-- [ ] DB 연결 테스트 쿼리(`SELECT 1`)가 성공한다
-- [ ] DB 비밀번호가 로그에 출력되지 않는다
+- [x] `src/config/database.js`에서 Pool 인스턴스가 단일 생성되어 named export된다
+- [x] 필수 환경변수 누락 시 서버 기동이 중단된다
+- [x] DB 연결 테스트 쿼리(`SELECT 1`)가 성공한다
+- [x] DB 비밀번호가 로그에 출력되지 않는다
 
 #### 작업 항목
-- [ ] `src/config/env.js` 작성 (dotenv 로드, 필수 환경변수 검증, 누락 시 `process.exit(1)`)
-- [ ] `src/config/database.js` 작성 (pg.Pool 인스턴스, named export)
-- [ ] `src/app.js`에서 `env.js` 최우선 import 적용
+- [x] `src/config/env.js` 작성 (dotenv 로드, 필수 환경변수 검증, 누락 시 `process.exit(1)`)
+- [x] `src/config/database.js` 작성 (pg.Pool 인스턴스, named export)
+- [x] `src/app.js`에서 `env.js` 최우선 import 적용
 
 ---
 
@@ -309,17 +309,17 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1.5h | **의존성**: BE-03, DB-01
 
 #### 완료 조건
-- [ ] `npm run db:migrate` 실행 시 테이블, 인덱스, 트리거가 생성된다
-- [ ] `npm run db:seed` 실행 시 admin 계정이 생성되며 중복 실행 시 오류가 없다 (멱등성)
-- [ ] admin 비밀번호가 bcrypt 해시로 저장된다
+- [x] `npm run db:migrate` 실행 시 테이블, 인덱스, 트리거가 생성된다
+- [x] `npm run db:seed` 실행 시 admin 계정이 생성되며 중복 실행 시 오류가 없다 (멱등성)
+- [x] admin 비밀번호가 bcrypt 해시로 저장된다
 
 #### 작업 항목
-- [ ] `src/db/migrations/001_create_users.sql` 작성
-- [ ] `src/db/migrations/002_create_categories.sql` 작성
-- [ ] `src/db/migrations/003_create_todos.sql` 작성
-- [ ] `src/db/migrate.js` 작성 (파일 순번 정렬 후 순차 실행)
-- [ ] `src/db/seeds/01_admin_user.js` 작성 (존재 확인 후 INSERT, bcrypt 해시)
-- [ ] `package.json`에 `db:migrate`, `db:seed` 스크립트 등록
+- [x] `src/db/migrations/001_create_users.sql` 작성
+- [x] `src/db/migrations/002_create_categories.sql` 작성
+- [x] `src/db/migrations/003_create_todos.sql` 작성
+- [x] `src/db/migrate.js` 작성 (파일 순번 정렬 후 순차 실행)
+- [x] `src/db/seeds/01_admin_user.js` 작성 (존재 확인 후 INSERT, bcrypt 해시)
+- [x] `package.json`에 `db:migrate`, `db:seed` 스크립트 등록
 
 ---
 
@@ -329,16 +329,16 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1.5h | **의존성**: BE-02
 
 #### 완료 조건
-- [ ] 토큰 없음/유효하지 않은 토큰에 대해 401 응답이 반환된다
-- [ ] 유효한 토큰의 경우 `req.user`에 `{ id, username, role }`이 설정된다
-- [ ] `requireAdmin` 미들웨어가 USER 역할 요청에 403을 반환한다
-- [ ] 만료 토큰에 `TOKEN_EXPIRED` 오류 코드가 반환된다
-- [ ] 로그에 JWT 전체 문자열이 출력되지 않는다
+- [x] 토큰 없음/유효하지 않은 토큰에 대해 401 응답이 반환된다
+- [x] 유효한 토큰의 경우 `req.user`에 `{ id, username, role }`이 설정된다
+- [x] `requireAdmin` 미들웨어가 USER 역할 요청에 403을 반환한다
+- [x] 만료 토큰에 `TOKEN_EXPIRED` 오류 코드가 반환된다
+- [x] 로그에 JWT 전체 문자열이 출력되지 않는다
 
 #### 작업 항목
-- [ ] `src/middlewares/auth-middleware.js` 작성 (헤더 파싱, verifyToken, req.user 설정)
-- [ ] `src/middlewares/role-middleware.js` 작성 (`requireAdmin` — role 검증, 403 반환)
-- [ ] 토큰 만료/서명 오류 케이스별 오류 코드 분기 처리
+- [x] `src/middlewares/auth-middleware.js` 작성 (헤더 파싱, verifyToken, req.user 설정)
+- [x] `src/middlewares/role-middleware.js` 작성 (`requireAdmin` — role 검증, 403 반환)
+- [x] 토큰 만료/서명 오류 케이스별 오류 코드 분기 처리
 
 ---
 
@@ -348,16 +348,16 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 1.5h | **의존성**: BE-02
 
 #### 완료 조건
-- [ ] 모든 오류가 `{ success: false, error: { code, message } }` 구조로 반환된다
-- [ ] `NODE_ENV=production`에서 스택 트레이스가 응답에 포함되지 않는다
-- [ ] 요청 로그에 `userId`, `method`, `path`, `statusCode`, `responseTime`이 포함된다
-- [ ] `password` 필드 및 `Authorization` 헤더가 로그에 노출되지 않는다
+- [x] 모든 오류가 `{ success: false, error: { code, message } }` 구조로 반환된다
+- [x] `NODE_ENV=production`에서 스택 트레이스가 응답에 포함되지 않는다
+- [x] 요청 로그에 `userId`, `method`, `path`, `statusCode`, `responseTime`이 포함된다
+- [x] `password` 필드 및 `Authorization` 헤더가 로그에 노출되지 않는다
 
 #### 작업 항목
-- [ ] `src/middlewares/error-handler.js` 작성 (4인자 핸들러, 환경별 스택 분기)
-- [ ] 커스텀 `AppError` 클래스 작성 (`message`, `code`, `statusCode`)
-- [ ] `src/middlewares/logger.js` 작성 (요청/응답 로깅, password·Authorization 마스킹)
-- [ ] `src/app.js`에 로거(라우터 앞), 에러핸들러(라우터 뒤) 등록
+- [x] `src/middlewares/error-handler.js` 작성 (4인자 핸들러, 환경별 스택 분기)
+- [x] 커스텀 `AppError` 클래스 작성 (`message`, `code`, `statusCode`)
+- [x] `src/middlewares/logger.js` 작성 (요청/응답 로깅, password·Authorization 마스킹)
+- [x] `src/app.js`에 로거(라우터 앞), 에러핸들러(라우터 뒤) 등록
 
 ---
 
@@ -367,17 +367,17 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 2h | **의존성**: BE-06
 
 #### 완료 조건
-- [ ] 필수 필드 누락 시 400 + `VALIDATION_ERROR` 코드로 응답한다
-- [ ] username 4~20자 영문·숫자 미준수 시 400 반환된다
-- [ ] title 200자 초과, description 1000자 초과 시 400 반환된다
-- [ ] colorCode hex 형식 미준수 시 400 반환된다
+- [x] 필수 필드 누락 시 400 + `VALIDATION_ERROR` 코드로 응답한다
+- [x] username 4~20자 영문·숫자 미준수 시 400 반환된다
+- [x] title 200자 초과, description 1000자 초과 시 400 반환된다
+- [x] colorCode hex 형식 미준수 시 400 반환된다
 
 #### 작업 항목
-- [ ] `src/middlewares/validators/auth-validator.js` 작성 (`validateRegister`, `validateLogin`)
-- [ ] `src/middlewares/validators/todo-validator.js` 작성 (`validateCreateTodo`, `validateUpdateTodo`)
-- [ ] `src/middlewares/validators/category-validator.js` 작성 (`validateCreateCategory`, `validateUpdateCategory`)
-- [ ] `src/middlewares/validators/admin-validator.js` 작성 (`validateUpdateUserStatus`)
-- [ ] 실패 시 `next(new AppError(...))` 방식으로 에러 핸들러에 위임
+- [x] `src/middlewares/validators/auth-validator.js` 작성 (`validateRegister`, `validateLogin`)
+- [x] `src/middlewares/validators/todo-validator.js` 작성 (`validateCreateTodo`, `validateUpdateTodo`)
+- [x] `src/middlewares/validators/category-validator.js` 작성 (`validateCreateCategory`, `validateUpdateCategory`)
+- [x] `src/middlewares/validators/admin-validator.js` 작성 (`validateUpdateUserStatus`)
+- [x] 실패 시 `next(new AppError(...))` 방식으로 에러 핸들러에 위임
 
 ---
 
@@ -387,19 +387,19 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 3h | **의존성**: BE-03, BE-05, BE-06, BE-07
 
 #### 완료 조건
-- [ ] `POST /api/auth/register` 성공 시 201 + 사용자 정보 반환 (password 미포함)
-- [ ] username 중복 시 409 + `CONFLICT` 코드 반환
-- [ ] `POST /api/auth/login` 성공 시 200 + JWT 토큰 반환
-- [ ] 잘못된 자격증명 시 401 + `UNAUTHORIZED` 반환
-- [ ] 비활성 계정 로그인 시 401 + `ACCOUNT_DISABLED` 반환 (BR-12)
-- [ ] 비밀번호가 bcrypt 해시로 DB에 저장된다
+- [x] `POST /api/auth/register` 성공 시 201 + 사용자 정보 반환 (password 미포함)
+- [x] username 중복 시 409 + `CONFLICT` 코드 반환
+- [x] `POST /api/auth/login` 성공 시 200 + JWT 토큰 반환
+- [x] 잘못된 자격증명 시 401 + `UNAUTHORIZED` 반환
+- [x] 비활성 계정 로그인 시 401 + `ACCOUNT_DISABLED` 반환 (BR-12)
+- [x] 비밀번호가 bcrypt 해시로 DB에 저장된다
 
 #### 작업 항목
-- [ ] `src/repositories/user-repository.js` 작성 (`findByUsername`, `createUser`, `findById`)
-- [ ] `src/services/auth-service.js` 작성 (`register`, `login`)
-- [ ] `src/controllers/auth-controller.js` 작성 (`register`, `login` 핸들러)
-- [ ] `src/routes/auth-routes.js` 작성 (미들웨어 + 컨트롤러 연결)
-- [ ] `src/app.js`에 `/api/auth` prefix 등록
+- [x] `src/repositories/user-repository.js` 작성 (`findByUsername`, `createUser`, `findById`)
+- [x] `src/services/auth-service.js` 작성 (`register`, `login`)
+- [x] `src/controllers/auth-controller.js` 작성 (`register`, `login` 핸들러)
+- [x] `src/routes/auth-routes.js` 작성 (미들웨어 + 컨트롤러 연결)
+- [x] `src/app.js`에 `/api/auth` prefix 등록
 
 ---
 
@@ -409,19 +409,19 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 5h | **의존성**: BE-03, BE-05, BE-06, BE-07, BE-08
 
 #### 완료 조건
-- [ ] `GET /api/todos` 요청 시 본인 할일만 반환 (ADMIN은 전체), 카테고리/상태 필터 동작 (BR-02, FR-06)
-- [ ] OVERDUE 판별 결과가 응답 `status`에 반영되며 DB에는 'PENDING'으로 저장 (BR-07)
-- [ ] 타인 todo 접근 시 404로 처리 (BR-02)
-- [ ] `PATCH .../complete` 성공 시 `completedAt`이 기록됨 (BR-08)
-- [ ] `PATCH .../uncomplete` 성공 시 `completedAt: null`로 초기화 (FR-11)
-- [ ] 응답 DTO에서 snake_case → camelCase 변환 (LA-03)
+- [x] `GET /api/todos` 요청 시 본인 할일만 반환 (ADMIN은 전체), 카테고리/상태 필터 동작 (BR-02, FR-06)
+- [x] OVERDUE 판별 결과가 응답 `status`에 반영되며 DB에는 'PENDING'으로 저장 (BR-07)
+- [x] 타인 todo 접근 시 404로 처리 (BR-02)
+- [x] `PATCH .../complete` 성공 시 `completedAt`이 기록됨 (BR-08)
+- [x] `PATCH .../uncomplete` 성공 시 `completedAt: null`로 초기화 (FR-11)
+- [x] 응답 DTO에서 snake_case → camelCase 변환 (LA-03)
 
 #### 작업 항목
-- [ ] `src/repositories/todo-repository.js` 작성 (findAll, findById, create, update, deleteById, complete, uncomplete)
-- [ ] `src/services/todo-service.js` 작성 (`toTodoDto` — OVERDUE 판별 포함, getTodos, getTodoById, createTodo, updateTodo, deleteTodo, completeTodo, uncompleteTodo)
-- [ ] `src/controllers/todo-controller.js` 작성 (7개 핸들러)
-- [ ] `src/routes/todo-routes.js` 작성 (authenticate 미들웨어 공통 적용)
-- [ ] `src/app.js`에 `/api/todos` prefix 등록
+- [x] `src/repositories/todo-repository.js` 작성 (findAll, findById, create, update, deleteById, complete, uncomplete)
+- [x] `src/services/todo-service.js` 작성 (`toTodoDto` — OVERDUE 판별 포함, getTodos, getTodoById, createTodo, updateTodo, deleteTodo, completeTodo, uncompleteTodo)
+- [x] `src/controllers/todo-controller.js` 작성 (7개 핸들러)
+- [x] `src/routes/todo-routes.js` 작성 (authenticate 미들웨어 공통 적용)
+- [x] `src/app.js`에 `/api/todos` prefix 등록
 
 ---
 
@@ -431,17 +431,17 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 3h | **의존성**: BE-03, BE-05, BE-06, BE-07, BE-08
 
 #### 완료 조건
-- [ ] `GET /api/categories` 요청 시 본인 카테고리 목록만 반환 (BR-04)
-- [ ] 중복 카테고리명 시 409 + `CONFLICT` 반환 (BR-06)
-- [ ] `DELETE` 성공 시 204 반환, 연결 todos의 `category_id`는 null 유지 (BR-05)
-- [ ] 타인 카테고리 접근 시 404 처리 (BR-02)
+- [x] `GET /api/categories` 요청 시 본인 카테고리 목록만 반환 (BR-04)
+- [x] 중복 카테고리명 시 409 + `CONFLICT` 반환 (BR-06)
+- [x] `DELETE` 성공 시 200 반환 (data: null), 연결 todos의 `category_id`는 null 유지 (BR-05)
+- [x] 타인 카테고리 접근 시 404 처리 (BR-02)
 
 #### 작업 항목
-- [ ] `src/repositories/category-repository.js` 작성 (findAllByUserId, findById, findByNameAndUserId, create, update, deleteById)
-- [ ] `src/services/category-service.js` 작성 (toCategoryDto, getCategories, createCategory, updateCategory, deleteCategory)
-- [ ] `src/controllers/category-controller.js` 작성 (4개 핸들러)
-- [ ] `src/routes/category-routes.js` 작성 (authenticate 공통 적용)
-- [ ] `src/app.js`에 `/api/categories` prefix 등록
+- [x] `src/repositories/category-repository.js` 작성 (findAllByUserId, findById, findByNameAndUserId, create, update, deleteById)
+- [x] `src/services/category-service.js` 작성 (toCategoryDto, getCategories, createCategory, updateCategory, deleteCategory)
+- [x] `src/controllers/category-controller.js` 작성 (4개 핸들러)
+- [x] `src/routes/category-routes.js` 작성 (authenticate 공통 적용)
+- [x] `src/app.js`에 `/api/categories` prefix 등록
 
 ---
 
@@ -451,17 +451,17 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 중간 | **예상 소요**: 2.5h | **의존성**: BE-03, BE-05, BE-06, BE-07, BE-08
 
 #### 완료 조건
-- [ ] `GET /api/admin/users`는 ADMIN만 접근 가능하며 전체 사용자 목록 반환 (FR-18)
-- [ ] 응답에 `password` 필드가 포함되지 않는다
-- [ ] admin 계정 비활성화 시도 시 400 + `ADMIN_DEACTIVATION_FORBIDDEN` 반환
-- [ ] USER 역할로 접근 시 403 반환
+- [x] `GET /api/admin/users`는 ADMIN만 접근 가능하며 전체 사용자 목록 반환 (FR-18)
+- [x] 응답에 `password` 필드가 포함되지 않는다
+- [x] admin 계정 비활성화 시도 시 400 + `ADMIN_DEACTIVATION_FORBIDDEN` 반환
+- [x] USER 역할로 접근 시 403 반환
 
 #### 작업 항목
-- [ ] `src/repositories/user-repository.js`에 `findAll()`, `updateStatus(id, isActive)` 추가
-- [ ] `src/services/admin-service.js` 작성 (toUserDto — password 제외, getAllUsers, updateUserStatus)
-- [ ] `src/controllers/admin-controller.js` 작성 (`listUsers`, `updateUserStatus` 핸들러)
-- [ ] `src/routes/admin-routes.js` 작성 (authenticate + requireAdmin 공통 적용)
-- [ ] `src/app.js`에 `/api/admin` prefix 등록
+- [x] `src/repositories/user-repository.js`에 `findAll()`, `updateStatus(id, isActive)` 추가
+- [x] `src/services/admin-service.js` 작성 (toUserDto — password 제외, getAllUsers, updateUserStatus)
+- [x] `src/controllers/admin-controller.js` 작성 (`listUsers`, `listTodos`, `updateUserStatus` 핸들러)
+- [x] `src/routes/admin-routes.js` 작성 (authenticate + requireAdmin 공통 적용)
+- [x] `src/app.js`에 `/api/admin` prefix 등록
 
 ---
 
@@ -471,18 +471,18 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 중간 | **예상 소요**: 4h | **의존성**: BE-08, BE-09, BE-10, BE-11
 
 #### 완료 조건
-- [ ] `npm test` 실행 시 모든 단위 테스트가 통과한다
-- [ ] Service 레이어 코드 커버리지가 80% 이상이다
-- [ ] Repository 의존성이 `jest.mock()`으로 격리된다
-- [ ] OVERDUE 판별 테스트에서 `new Date()`가 Mock 처리된다
-- [ ] 정상/오류 경로가 모두 테스트된다
+- [x] `npm test` 실행 시 모든 단위 테스트가 통과한다
+- [x] Service 레이어 코드 커버리지가 80% 이상이다 (실제 98% 이상)
+- [x] Repository 의존성이 `jest.mock()`으로 격리된다
+- [x] OVERDUE 판별 테스트에서 `new Date()`가 Mock 처리된다
+- [x] 정상/오류 경로가 모두 테스트된다
 
 #### 작업 항목
-- [ ] `jest.config.js` 작성 (커버리지 임계값 80%, 대상 `src/services/**`)
-- [ ] `src/services/auth-service.test.js` (register 정상/중복, login 정상/비밀번호오류/비활성)
-- [ ] `src/services/todo-service.test.js` (toTodoDto OVERDUE 판별 4가지 케이스, 소유권 검증)
-- [ ] `src/services/category-service.test.js` (생성 정상/중복, 수정 소유권/중복, 삭제 소유권)
-- [ ] `src/services/admin-service.test.js` (비활성화 정상, admin 계정 비활성화 오류)
+- [x] `jest.config.js` 작성 (커버리지 임계값 80%, 대상 `src/services/**`)
+- [x] `src/services/auth-service.test.js` (register 정상/중복, login 정상/비밀번호오류/비활성)
+- [x] `src/services/todo-service.test.js` (toTodoDto OVERDUE 판별 4가지 케이스, 소유권 검증)
+- [x] `src/services/category-service.test.js` (생성 정상/중복, 수정 소유권/중복, 삭제 소유권)
+- [x] `src/services/admin-service.test.js` (비활성화 정상, admin 계정 비활성화 오류)
 
 ---
 
@@ -492,18 +492,18 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 중간 | **예상 소요**: 4h | **의존성**: BE-12, DB-01
 
 #### 완료 조건
-- [ ] `npm run test:integration` 실행 시 모든 통합 테스트가 통과한다
-- [ ] 각 테스트 케이스 전후 DB 상태가 초기화된다
-- [ ] 미인증 접근 시 401, USER의 ADMIN 접근 시 403이 검증된다
+- [x] `npm run test:integration` 실행 시 모든 통합 테스트가 통과한다
+- [x] 각 테스트 케이스 전후 DB 상태가 초기화된다
+- [x] 미인증 접근 시 401, USER의 ADMIN 접근 시 403이 검증된다
 
 #### 작업 항목
-- [ ] `.env.test` 설정 (테스트 전용 DB 분리)
-- [ ] `tests/helpers/test-setup.js` 작성 (TRUNCATE 헬퍼, 사용자 생성 헬퍼, JWT 발급 헬퍼)
-- [ ] `tests/integration/auth.test.js` 작성 (register 201/409/400, login 200/401)
-- [ ] `tests/integration/todos.test.js` 작성 (목록조회, OVERDUE 반영, 완료처리, 삭제, 타인 접근 404)
-- [ ] `tests/integration/categories.test.js` 작성 (생성 201/409, 삭제 후 todos.category_id null 검증)
-- [ ] `tests/integration/admin.test.js` 작성 (사용자 목록 ADMIN/USER 분기, admin 비활성화 400)
-- [ ] `package.json`에 `test:integration` 스크립트 등록
+- [x] `.env.test` 설정 (테스트 전용 DB 분리)
+- [x] `tests/helpers/test-setup.js` 작성 (TRUNCATE 헬퍼, 사용자 생성 헬퍼, JWT 발급 헬퍼)
+- [x] `tests/integration/auth.test.js` 작성 (register 201/409/400, login 200/401)
+- [x] `tests/integration/todos.test.js` 작성 (목록조회, OVERDUE 반영, 완료처리, 삭제, 타인 접근 404)
+- [x] `tests/integration/categories.test.js` 작성 (생성 201/409, 삭제 후 todos.category_id null 검증)
+- [x] `tests/integration/admin.test.js` 작성 (사용자 목록 ADMIN/USER 분기, admin 비활성화 400)
+- [x] `package.json`에 `test:integration` 스크립트 등록
 
 ---
 

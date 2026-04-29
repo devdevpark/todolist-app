@@ -1,6 +1,6 @@
 # TodoList ERD (Entity Relationship Diagram)
 
-> 버전: 1.0.0 | 작성일: 2026-04-28 | 작성자: chpark
+> 버전: 1.1.0 | 작성일: 2026-04-29 | 작성자: chpark
 
 ---
 
@@ -9,6 +9,7 @@
 | 버전 | 변경일 | 작성자 | 변경 유형 | 변경 내용 |
 |------|--------|--------|-----------|-----------|
 | 1.0.0 | 2026-04-28 | chpark | 최초 작성 | ERD 초안 작성 |
+| 1.1.0 | 2026-04-29 | chpark | 업데이트 | 인덱스 및 트리거 정보 추가 (스키마 정합성 확보) |
 
 ---
 
@@ -53,7 +54,7 @@ erDiagram
 
 ---
 
-## 2. 테이블 제약조건 상세
+## 2. 테이블 제약조건 및 인덱스 상세
 
 ### users
 
@@ -76,7 +77,10 @@ erDiagram
 | color_code | VARCHAR(7) | NOT NULL | — |
 | created_at | TIMESTAMP | NOT NULL | `now()` |
 
-- UNIQUE (user_id, name) — 동일 사용자 내 카테고리명 중복 불가
+- **제약조건**:
+  - `uq_categories_user_name`: UNIQUE (user_id, name) — 동일 사용자 내 카테고리명 중복 불가
+- **인덱스**:
+  - `idx_categories_user_id`: categories (user_id) — 사용자별 목록 조회 성능 최적화
 
 ### todos
 
@@ -93,7 +97,14 @@ erDiagram
 | updated_at | TIMESTAMP | NOT NULL | `now()` |
 | completed_at | TIMESTAMP | NULL 허용 | `NULL` |
 
-- categories 삭제 시 → todos.category_id `SET NULL` (할일 보존)
+- **제약조건**:
+  - `fk_todos_category`: ON DELETE SET NULL (카테고리 삭제 시 할일 보존)
+- **트리거**:
+  - `trg_todos_updated_at`: UPDATE 시 `updated_at`을 `now()`로 자동 갱신
+- **인덱스**:
+  - `idx_todos_user_id`: todos (user_id)
+  - `idx_todos_category_id`: todos (category_id)
+  - `idx_todos_status_due`: todos (user_id, status, due_date) — OVERDUE 판별 쿼리 최적화
 
 ---
 
@@ -106,6 +117,7 @@ erDiagram
 | username 유일성 | UNIQUE 인덱스 | 시스템 전체 유일 (BR-11) |
 | 카테고리명 유일성 | UNIQUE (user_id, name) | 사용자 내 유일, 사용자 간 독립 (BR-06) |
 | 기본키 타입 | UUID | 순차 ID 예측 공격 방지 |
+| updated_at 갱신 | DB 트리거 | 애플리케이션 계층 누락 방지 및 일관성 보장 |
 
 ---
 
