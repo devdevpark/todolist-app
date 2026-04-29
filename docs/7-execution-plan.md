@@ -562,16 +562,16 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 2h | **의존성**: FE-01, FE-04
 
 #### 완료 조건
-- [ ] 모든 화면 라우트가 `src/router/index.jsx`에 정의된다
-- [ ] 유효한 JWT 미존재 시 `/login`으로 리다이렉트된다
-- [ ] `/admin/users`는 ADMIN role만 접근 가능하다
-- [ ] 인증된 사용자의 `/login`, `/register` 접근 시 `/todos`로 리다이렉트된다
+- [x] 모든 화면 라우트가 `src/router/index.jsx`에 정의된다
+- [x] 유효한 JWT 미존재 시 `/login`으로 리다이렉트된다
+- [x] `/admin/users`는 ADMIN role만 접근 가능하다
+- [x] 인증된 사용자의 `/login`, `/register` 접근 시 `/todos`로 리다이렉트된다
 
 #### 작업 항목
-- [ ] `src/router/ProtectedRoute.jsx` 구현 (auth-store 토큰 확인, 리다이렉트)
-- [ ] `src/router/index.jsx` 작성 (모든 경로 정의 및 ProtectedRoute 적용)
-- [ ] 리다이렉트 전 URL을 sessionStorage에 저장, 로그인 성공 후 해당 경로로 이동 (SC-EX-03)
-- [ ] ADMIN role 검증 처리 (`requiredRole` prop 또는 별도 컴포넌트)
+- [x] `src/router/ProtectedRoute.jsx` 구현 (auth-store 토큰 확인, 리다이렉트)
+- [x] `src/router/index.jsx` 작성 (모든 경로 정의 및 ProtectedRoute 적용)
+- [x] 리다이렉트 전 URL을 sessionStorage에 저장, 로그인 성공 후 해당 경로로 이동 (SC-EX-03)
+- [x] ADMIN role 검증 처리 (`requiredRole` prop 또는 별도 컴포넌트)
 
 ---
 
@@ -581,18 +581,18 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 2h | **의존성**: FE-01
 
 #### 완료 조건
-- [ ] `auth-store.js`에 token, user, isAuthenticated 상태와 setAuth, clearAuth 액션이 정의된다
-- [ ] 앱 초기 로드 시 localStorage 토큰이 존재하면 auth-store에 자동 복원된다
-- [ ] `clearAuth()` 호출 시 localStorage 토큰도 함께 제거된다
-- [ ] `token-storage.js`는 React 의존성 없는 순수 함수로 구성된다
-- [ ] `ui-store.js`에 모달 상태 등 UI 전역 상태가 분리 정의된다
+- [x] `auth-store.js`에 token, user, isAuthenticated 상태와 setAuth, clearAuth 액션이 정의된다
+- [x] 앱 초기 로드 시 localStorage 토큰이 존재하면 auth-store에 자동 복원된다
+- [x] `clearAuth()` 호출 시 localStorage 토큰도 함께 제거된다
+- [x] `token-storage.js`는 React 의존성 없는 순수 함수로 구성된다
+- [x] `ui-store.js`에 모달 상태 등 UI 전역 상태가 분리 정의된다
 
 #### 작업 항목
-- [ ] `src/utils/token-storage.js` 구현 (`getToken`, `setToken`, `removeToken`)
-- [ ] `src/store/auth-store.js` 구현 (Zustand create, token/user/isAuthenticated/setAuth/clearAuth)
-- [ ] 앱 초기화 지점에서 `getToken()`으로 auth-store 복원 로직 추가
-- [ ] `src/store/ui-store.js` 구현 (isDialogOpen 등 UI 상태)
-- [ ] `src/constants/user-role.js` 생성
+- [x] `src/utils/token-storage.js` 구현 (`getToken`, `setToken`, `removeToken`)
+- [x] `src/store/auth-store.js` 구현 (Zustand create, token/user/isAuthenticated/setAuth/clearAuth)
+- [x] 앱 초기화 지점에서 `getToken()`으로 auth-store 복원 로직 추가
+- [x] `src/store/ui-store.js` 구현 (isDialogOpen 등 UI 상태)
+- [x] `src/constants/user-role.js` 생성
 
 ---
 
@@ -602,17 +602,17 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 2h | **의존성**: FE-01, FE-04
 
 #### 완료 조건
-- [ ] `src/api/http-client.js`에 공통 fetch wrapper가 구현된다
-- [ ] 모든 요청에 `Authorization: Bearer {token}` 헤더가 자동 첨부된다
-- [ ] `{ success: false, error }` 응답을 파싱하여 일관된 에러를 throw한다
-- [ ] 401 수신 시 auth-store 초기화 및 `/login` 리다이렉트가 동작한다
-- [ ] `src/constants/api-endpoints.js`에 모든 API 경로 상수가 정의된다
+- [x] `src/api/http-client.js`에 공통 fetch wrapper가 구현된다
+- [x] 모든 요청에 `Authorization: Bearer {token}` 헤더가 자동 첨부된다
+- [x] `{ success: false, error }` 응답을 파싱하여 일관된 에러를 throw한다
+- [x] 401 수신 시 auth-store 초기화 및 `/login` 리다이렉트가 동작한다
+- [x] `src/constants/api-endpoints.js`에 모든 API 경로 상수가 정의된다
 
 #### 작업 항목
-- [ ] `src/constants/api-endpoints.js` 구현 (NM-04 기준 모든 엔드포인트 상수)
-- [ ] `src/api/http-client.js` 구현 (`request` 함수: baseURL 조합, 헤더 첨부, 응답 파싱, 401 처리)
-- [ ] `get`, `post`, `put`, `patch`, `del` 편의 함수 내보내기
-- [ ] `src/constants/todo-status.js` 생성
+- [x] `src/constants/api-endpoints.js` 구현 (NM-04 기준 모든 엔드포인트 상수)
+- [x] `src/api/http-client.js` 구현 (`request` 함수: baseURL 조합, 헤더 첨부, 응답 파싱, 401 처리)
+- [x] `get`, `post`, `put`, `patch`, `del` 편의 함수 내보내기
+- [x] `src/constants/todo-status.js` 생성
 
 ---
 
@@ -622,21 +622,21 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 3h | **의존성**: FE-02, FE-03, FE-04, FE-05, BE-08
 
 #### 완료 조건
-- [ ] 로그인 성공 시 `/todos`로 이동하고 토큰이 저장된다
-- [ ] 비활성 계정 로그인 시 "비활성화된 계정입니다." 메시지가 표시된다 (SC-EX-02)
-- [ ] 잘못된 자격증명 시 "아이디 또는 비밀번호가 올바르지 않습니다." 메시지가 표시된다
-- [ ] 회원가입 성공 시 `/login`으로 이동한다
-- [ ] username 중복 시 "이미 사용 중인 사용자 이름입니다." 메시지가 표시된다 (SC-EX-01)
-- [ ] API 호출 중 버튼이 disabled + Spinner 상태로 표시된다
+- [x] 로그인 성공 시 `/todos`로 이동하고 토큰이 저장된다
+- [x] 비활성 계정 로그인 시 "비활성화된 계정입니다." 메시지가 표시된다 (SC-EX-02)
+- [x] 잘못된 자격증명 시 "아이디 또는 비밀번호가 올바르지 않습니다." 메시지가 표시된다
+- [x] 회원가입 성공 시 `/login`으로 이동한다
+- [x] username 중복 시 "이미 사용 중인 사용자 이름입니다." 메시지가 표시된다 (SC-EX-01)
+- [x] API 호출 중 버튼이 disabled + Spinner 상태로 표시된다
 
 #### 작업 항목
-- [ ] `src/api/auth-api.js` 구현 (`register`, `login`)
-- [ ] `src/hooks/useAuth.js` 구현 (`useLogin`, `useRegister` — useMutation, 성공 시 setAuth + navigate)
-- [ ] `src/utils/validators.js` 구현 (`validateUsername`, `validatePassword`)
-- [ ] `src/pages/LoginPage.jsx` 구현 (폼, 에러 메시지, 회원가입 링크)
-- [ ] `src/pages/RegisterPage.jsx` 구현 (폼, 에러 메시지, 로그인 링크)
-- [ ] 로그인 성공 후 sessionStorage redirect URL 처리
-- [ ] 로그아웃: `clearAuth()` + navigate('/login')
+- [x] `src/api/auth-api.js` 구현 (`register`, `login`)
+- [x] `src/hooks/useAuth.js` 구현 (`useLogin`, `useRegister` — useMutation, 성공 시 setAuth + navigate)
+- [x] `src/utils/validators.js` 구현 (`validateUsername`, `validatePassword`)
+- [x] `src/pages/LoginPage.jsx` 구현 (폼, 에러 메시지, 회원가입 링크)
+- [x] `src/pages/RegisterPage.jsx` 구현 (폼, 에러 메시지, 로그인 링크)
+- [x] 로그인 성공 후 sessionStorage redirect URL 처리
+- [x] 로그아웃: `clearAuth()` + navigate('/login')
 
 ---
 
@@ -646,20 +646,20 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 4h | **의존성**: FE-02, FE-03, FE-05, BE-10
 
 #### 완료 조건
-- [ ] 카테고리 목록이 표시되고 추가 후 즉시 목록이 갱신된다
-- [ ] 중복 카테고리명 시 "이미 사용 중인 카테고리 이름입니다." 표시 (SC-EX-05)
-- [ ] 삭제 시 "연결된 할일의 카테고리가 해제됩니다." 확인 Dialog 표시 (FR-16)
-- [ ] colorCode 기반 색상이 각 카테고리에 표시된다
-- [ ] 로딩 중 Spinner가 표시된다
+- [x] 카테고리 목록이 표시되고 추가 후 즉시 목록이 갱신된다
+- [x] 중복 카테고리명 시 "이미 사용 중인 카테고리 이름입니다." 표시 (SC-EX-05)
+- [x] 삭제 시 "연결된 할일의 카테고리가 해제됩니다." 확인 Dialog 표시 (FR-16)
+- [x] colorCode 기반 색상이 각 카테고리에 표시된다
+- [x] 로딩 중 Spinner가 표시된다
 
 #### 작업 항목
-- [ ] `src/api/category-api.js` 구현 (getCategories, createCategory, updateCategory, deleteCategory)
-- [ ] `src/hooks/useCategories.js` 구현 (useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory — invalidate 포함)
-- [ ] `src/pages/CategoryPage.jsx` 구현 (레이아웃 조합)
-- [ ] `src/components/CategoryCard.jsx` 구현 (색상점, name, 수정/삭제 버튼)
-- [ ] `src/components/CategoryForm.jsx` 구현 (name Input, colorCode Input, 저장/취소)
-- [ ] 삭제 확인 Dialog 연동
-- [ ] 반응형 그리드 레이아웃 적용
+- [x] `src/api/category-api.js` 구현 (getCategories, createCategory, updateCategory, deleteCategory)
+- [x] `src/hooks/useCategories.js` 구현 (useCategories, useCreateCategory, useUpdateCategory, useDeleteCategory — invalidate 포함)
+- [x] `src/pages/CategoryPage.jsx` 구현 (레이아웃 조합)
+- [x] `src/components/CategoryCard.jsx` 구현 (색상점, name, 수정/삭제 버튼)
+- [x] `src/components/CategoryForm.jsx` 구현 (name Input, colorCode Input, 저장/취소)
+- [x] 삭제 확인 Dialog 연동
+- [x] 반응형 그리드 레이아웃 적용
 
 ---
 
@@ -669,20 +669,20 @@ BE-03 + BE-05 + BE-06 + BE-07
 **우선순위**: 높음 | **예상 소요**: 5h | **의존성**: FE-02, FE-03, FE-05, FE-07, BE-09
 
 #### 완료 조건
-- [ ] OVERDUE 항목이 빨간 Badge로 표시된다 (서버 응답값 기준, 클라이언트 시각 미사용)
-- [ ] 카테고리/상태 필터가 정상 동작한다
-- [ ] 완료 처리/완료 취소 후 목록이 즉시 갱신된다
-- [ ] 빈 목록 시 안내 메시지와 등록 유도 버튼이 표시된다
-- [ ] 삭제 시 확인 Dialog가 표시된다
+- [x] OVERDUE 항목이 빨간 Badge로 표시된다 (서버 응답값 기준, 클라이언트 시각 미사용)
+- [x] 카테고리/상태 필터가 정상 동작한다
+- [x] 완료 처리/완료 취소 후 목록이 즉시 갱신된다
+- [x] 빈 목록 시 안내 메시지와 등록 유도 버튼이 표시된다
+- [x] 삭제 시 확인 Dialog가 표시된다
 
 #### 작업 항목
-- [ ] `src/api/todo-api.js` 구현 (getTodos, deleteTodo, completeTodo, uncompleteTodo)
-- [ ] `src/hooks/useTodos.js` 구현 (useTodos, useCompleteTodo, useUncompleteTodo, useDeleteTodo)
-- [ ] `src/pages/TodoListPage.jsx` 구현 (필터 + 목록 레이아웃)
-- [ ] `src/components/TodoCard.jsx` 구현 (제목, 카테고리 Badge, 상태 Badge, dueDate, 완료/삭제 버튼)
-- [ ] `src/components/TodoFilter.jsx` 구현 (카테고리 필터, 상태 필터)
-- [ ] 삭제 확인 Dialog 연동
-- [ ] 반응형 레이아웃 (모바일 1열, 데스크탑 다열)
+- [x] `src/api/todo-api.js` 구현 (getTodos, deleteTodo, completeTodo, uncompleteTodo)
+- [x] `src/hooks/useTodos.js` 구현 (useTodos, useCompleteTodo, useUncompleteTodo, useDeleteTodo)
+- [x] `src/pages/TodoListPage.jsx` 구현 (필터 + 목록 레이아웃)
+- [x] `src/components/TodoCard.jsx` 구현 (제목, 카테고리 Badge, 상태 Badge, dueDate, 완료/삭제 버튼)
+- [x] `src/components/TodoFilter.jsx` 구현 (카테고리 필터, 상태 필터)
+- [x] 삭제 확인 Dialog 연동
+- [x] 반응형 레이아웃 (모바일 1열, 데스크탑 다열)
 
 ---
 

@@ -1,0 +1,5 @@
+export const TODO_STATUS = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  OVERDUE: 'OVERDUE',
+};
