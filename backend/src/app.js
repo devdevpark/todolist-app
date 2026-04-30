@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import swaggerUi from 'swagger-ui-express';
 import { requestLogger } from './middlewares/logger.js';
 import { errorHandler } from './middlewares/error-handler.js';
@@ -15,8 +16,9 @@ const app = express();
 
 console.log('[App] Initializing Express application...');
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const swaggerDocument = JSON.parse(
-  fs.readFileSync(path.resolve(process.cwd(), '../swagger/swagger.json'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, '../../swagger/swagger.json'), 'utf8')
 );
 console.log('[App] Swagger documentation loaded.');
 
