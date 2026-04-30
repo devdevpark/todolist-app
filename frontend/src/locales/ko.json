@@ -2,7 +2,7 @@
   "common": {
     "appTitle": "TodoList",
     "todoList": "할일 목록",
-    "categoryManage": "카테고리 관리",
+    "categoryManage": "카테고리 관리 해요",
     "userManage": "사용자 관리",
     "login": "로그인",
     "register": "회원가입",
@@ -63,7 +63,7 @@
     }
   },
   "category": {
-    "list": "카테고리 관리",
+    "list": "카테고리 관리 해요",
     "new": "새 카테고리",
     "update": "카테고리 수정",
     "name": "카테고리 이름",
