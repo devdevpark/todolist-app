@@ -47,7 +47,11 @@ vi.mock('react-i18next', () => {
       optional: "선택",
       required: "필수",
       loading: "로딩 중...",
-      noData: "데이터가 없습니다."
+      noData: "데이터가 없습니다.",
+      lightMode: "라이트 모드로 전환",
+      darkMode: "다크 모드로 전환",
+      openMenu: "메뉴 열기",
+      confirm: "확인"
     },
     auth: {
       welcome: "할일 관리 서비스",

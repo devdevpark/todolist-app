@@ -25,7 +25,8 @@
     "noData": "No data found.",
     "lightMode": "Switch to Light Mode",
     "darkMode": "Switch to Dark Mode",
-    "openMenu": "Open Menu"
+    "openMenu": "Open Menu",
+    "confirm": "Confirm"
   },
   "auth": {
     "welcome": "Task Management Service",

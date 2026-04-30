@@ -1,0 +1,45 @@
+- generic [ref=e2]:
+  - banner [ref=e53]:
+    - generic [ref=e55]:
+      - generic [ref=e56]: TodoList
+      - navigation [ref=e57]:
+        - link "할일 목록" [ref=e58] [cursor=pointer]:
+          - /url: /todos
+        - link "카테고리 관리" [ref=e59] [cursor=pointer]:
+          - /url: /categories
+      - generic [ref=e60]:
+        - combobox "언어 선택" [ref=e61]:
+          - option "한국어" [selected]
+          - option "English"
+          - option "日本語"
+        - generic [ref=e62]:
+          - button "다크 모드로 전환" [ref=e63] [cursor=pointer]:
+            - img [ref=e64]
+          - button "로그아웃" [ref=e66] [cursor=pointer]
+  - main [ref=e67]:
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - heading "할일 수정" [level=1] [ref=e186]
+        - paragraph [ref=e187]: 할일 정보를 수정합니다.
+      - generic [ref=e189]:
+        - generic [ref=e190]:
+          - generic [ref=e191]: 제목
+          - textbox "제목" [active] [ref=e192]:
+            - /placeholder: 할 일을 입력하세요
+            - text: Playwright MCP 테스트 보고서 작성
+        - generic [ref=e193]:
+          - generic [ref=e194]: 설명 (선택)
+          - textbox "상세 내용을 입력하세요" [ref=e195]: 다국어 i18n 적용 후 사용자 시나리오 검증
+        - generic [ref=e196]:
+          - generic [ref=e197]:
+            - generic [ref=e198]: 카테고리 (선택)
+            - combobox "카테고리 (선택)" [ref=e199]:
+              - option "카테고리 없음"
+              - option "업무" [selected]
+          - generic [ref=e200]:
+            - generic [ref=e201]: 마감일 (선택)
+            - textbox "마감일 (선택)" [ref=e202]:
+              - /placeholder: ""
+        - generic [ref=e203]:
+          - button "취소" [ref=e204] [cursor=pointer]
+          - button "저장" [ref=e205] [cursor=pointer]

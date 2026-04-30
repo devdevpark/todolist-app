@@ -1,0 +1,19 @@
+- generic [ref=e38]:
+  - generic [ref=e39]:
+    - heading "TodoList" [level=1] [ref=e40]
+    - paragraph [ref=e41]: 할일 관리 서비스
+  - generic [ref=e42]:
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - generic [ref=e45]: 아이디
+        - textbox "아이디" [ref=e46]:
+          - /placeholder: 아이디 입력
+      - generic [ref=e47]:
+        - generic [ref=e48]: 비밀번호
+        - textbox "비밀번호" [ref=e49]:
+          - /placeholder: 비밀번호 입력
+    - button "로그인" [ref=e50] [cursor=pointer]
+  - paragraph [ref=e51]:
+    - text: 계정이 없으신가요?
+    - link "회원가입" [ref=e52] [cursor=pointer]:
+      - /url: /register

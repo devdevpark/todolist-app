@@ -35,7 +35,7 @@ describe('CategoryForm', () => {
     const user = userEvent.setup();
     render(<CategoryForm onSubmit={vi.fn()} onCancel={vi.fn()} />);
 
-    const greenButton = screen.getByLabelText('색상 선택: #22C55E');
+    const greenButton = screen.getByLabelText('색상 추가: #22C55E');
     await user.click(greenButton);
 
     const colorInput = screen.getByPlaceholderText('#000000');

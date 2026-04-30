@@ -1,0 +1,50 @@
+- generic [ref=e2]:
+  - banner [ref=e53]:
+    - generic [ref=e55]:
+      - generic [ref=e56]: TodoList
+      - navigation [ref=e57]:
+        - link "할일 목록" [ref=e58] [cursor=pointer]:
+          - /url: /todos
+        - link "카테고리 관리" [ref=e59] [cursor=pointer]:
+          - /url: /categories
+      - generic [ref=e60]:
+        - combobox "언어 선택" [ref=e61]:
+          - option "한국어" [selected]
+          - option "English"
+          - option "日本語"
+        - generic [ref=e62]:
+          - button "다크 모드로 전환" [ref=e63] [cursor=pointer]:
+            - img [ref=e64]
+          - button "로그아웃" [ref=e66] [cursor=pointer]
+  - main [ref=e67]:
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - heading "카테고리 관리" [level=1] [ref=e82]
+        - button "추가" [active] [ref=e83] [cursor=pointer]
+      - generic [ref=e88]:
+        - heading "새 카테고리" [level=2] [ref=e89]
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - generic [ref=e92]: 카테고리 이름
+            - textbox "카테고리 이름" [ref=e93]:
+              - /placeholder: 카테고리 이름 입력
+          - generic [ref=e94]:
+            - generic [ref=e95]: 색상
+            - generic [ref=e96]:
+              - 'button "색상 추가: #3B82F6" [ref=e97] [cursor=pointer]'
+              - 'button "색상 추가: #22C55E" [ref=e98] [cursor=pointer]'
+              - 'button "색상 추가: #EAB308" [ref=e99] [cursor=pointer]'
+              - 'button "색상 추가: #F97316" [ref=e100] [cursor=pointer]'
+              - 'button "색상 추가: #EF4444" [ref=e101] [cursor=pointer]'
+              - 'button "색상 추가: #8B5CF6" [ref=e102] [cursor=pointer]'
+              - 'button "색상 추가: #EC4899" [ref=e103] [cursor=pointer]'
+              - 'button "색상 추가: #06B6D4" [ref=e104] [cursor=pointer]'
+            - textbox "#000000" [ref=e106]: "#3B82F6"
+          - generic [ref=e109]: 미리보기
+          - generic [ref=e110]:
+            - button "취소" [ref=e111] [cursor=pointer]
+            - button "저장" [ref=e112] [cursor=pointer]
+      - generic [ref=e84]:
+        - generic [ref=e85]: 📝
+        - paragraph [ref=e86]: 카테고리가 없습니다.
+        - button "추가" [ref=e87] [cursor=pointer]

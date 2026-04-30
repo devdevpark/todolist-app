@@ -51,7 +51,7 @@ describe('CategoryPage', () => {
 
     renderPage();
 
-    await user.click(screen.getByRole('button', { name: '카테고리 추가' }));
+    await user.click(screen.getByRole('button', { name: '추가' }));
 
     expect(screen.getByLabelText('카테고리 이름')).toBeInTheDocument();
   });
@@ -69,7 +69,7 @@ describe('CategoryPage', () => {
 
     expect(mockOpenConfirmDialog).toHaveBeenCalledWith(
       expect.objectContaining({
-        title: '카테고리 삭제',
+        title: '삭제',
         message: expect.stringContaining('연결된 할일의 카테고리가 해제됩니다'),
       })
     );

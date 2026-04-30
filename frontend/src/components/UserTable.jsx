@@ -3,7 +3,7 @@ import { Button } from '@/components/common';
 import { USER_ROLE } from '@/constants/user-role';
 
 export default function UserTable({ users, onToggleStatus, isUpdating }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const getRoleBadgeClass = (role) => {
     return role === USER_ROLE.ADMIN
@@ -65,7 +65,7 @@ export default function UserTable({ users, onToggleStatus, isUpdating }) {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-500 dark:text-gray-400">
-                  {user.createdAt ? new Date(user.createdAt).toLocaleDateString('ko-KR') : '-'}
+                  {user.createdAt ? new Date(user.createdAt).toLocaleDateString(i18n.language) : '-'}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

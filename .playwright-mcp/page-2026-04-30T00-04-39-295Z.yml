@@ -1,0 +1,35 @@
+- generic [ref=e2]:
+  - banner [ref=e53]:
+    - generic [ref=e55]:
+      - generic [ref=e56]: TodoList
+      - navigation [ref=e57]:
+        - link "할일 목록" [ref=e58] [cursor=pointer]:
+          - /url: /todos
+        - link "카테고리 관리" [ref=e59] [cursor=pointer]:
+          - /url: /categories
+      - generic [ref=e60]:
+        - combobox "언어 선택" [ref=e61]:
+          - option "한국어" [selected]
+          - option "English"
+          - option "日本語"
+        - generic [ref=e62]:
+          - button "다크 모드로 전환" [ref=e63] [cursor=pointer]:
+            - img [ref=e64]
+          - button "로그아웃" [ref=e66] [cursor=pointer]
+  - main [ref=e67]:
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - heading "할일 목록" [level=1] [ref=e70]
+        - button "할일 등록" [ref=e71] [cursor=pointer]
+      - generic [ref=e73]:
+        - combobox "카테고리 필터" [ref=e74]:
+          - option "전체 카테고리" [selected]
+        - combobox "상태 필터" [ref=e75]:
+          - option "전체" [selected]
+          - option "대기중"
+          - option "완료"
+          - option "기한초과"
+      - generic [ref=e76]:
+        - generic [ref=e77]: 📝
+        - paragraph [ref=e78]: 할일이 없습니다.
+        - button "할일 등록" [ref=e79] [cursor=pointer]

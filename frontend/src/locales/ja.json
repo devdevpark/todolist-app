@@ -21,11 +21,12 @@
     "status": "ステータス",
     "optional": "任意",
     "required": "必須",
-    "loading": "読み込み중...",
+    "loading": "読み込み中...",
     "noData": "データがありません。",
     "lightMode": "ライトモードに切り替え",
     "darkMode": "ダークモードに切り替え",
-    "openMenu": "メニューを開く"
+    "openMenu": "メニューを開く",
+    "confirm": "確認"
   },
   "auth": {
     "welcome": "タスク管理サービス",

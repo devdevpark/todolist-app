@@ -1,0 +1,44 @@
+- generic [ref=e2]:
+  - banner [ref=e53]:
+    - generic [ref=e55]:
+      - generic [ref=e56]: TodoList
+      - navigation [ref=e57]:
+        - link "할일 목록" [ref=e58] [cursor=pointer]:
+          - /url: /todos
+        - link "카테고리 관리" [ref=e59] [cursor=pointer]:
+          - /url: /categories
+      - generic [ref=e60]:
+        - combobox "언어 선택" [ref=e61]:
+          - option "한국어" [selected]
+          - option "English"
+          - option "日本語"
+        - generic [ref=e62]:
+          - button "다크 모드로 전환" [ref=e63] [cursor=pointer]:
+            - img [ref=e64]
+          - button "로그아웃" [ref=e66] [cursor=pointer]
+  - main [ref=e67]:
+    - generic [ref=e134]:
+      - generic [ref=e135]:
+        - heading "할일 등록" [level=1] [ref=e136]
+        - paragraph [ref=e137]: 새로운 할일을 등록합니다.
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - generic [ref=e141]: 제목
+          - textbox "제목" [active] [ref=e142]:
+            - /placeholder: 할 일을 입력하세요
+        - generic [ref=e143]:
+          - generic [ref=e144]: 설명 (선택)
+          - textbox "상세 내용을 입력하세요" [ref=e145]
+        - generic [ref=e146]:
+          - generic [ref=e147]:
+            - generic [ref=e148]: 카테고리 (선택)
+            - combobox "카테고리 (선택)" [ref=e149]:
+              - option "카테고리 없음" [selected]
+              - option "업무"
+          - generic [ref=e150]:
+            - generic [ref=e151]: 마감일 (선택)
+            - textbox "마감일 (선택)" [ref=e152]:
+              - /placeholder: ""
+        - generic [ref=e153]:
+          - button "취소" [ref=e154] [cursor=pointer]
+          - button "저장" [ref=e155] [cursor=pointer]

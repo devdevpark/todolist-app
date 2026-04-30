@@ -96,7 +96,7 @@ function Header() {
               <button
                 type="button"
                 onClick={toggleDarkMode}
-                aria-label={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+                aria-label={isDarkMode ? t('common.lightMode') : t('common.darkMode')}
                 className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
               >
                 {isDarkMode ? <SunIcon /> : <MoonIcon />}
@@ -121,7 +121,7 @@ function Header() {
             <button
               type="button"
               onClick={toggleDarkMode}
-              aria-label={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+              aria-label={isDarkMode ? t('common.lightMode') : t('common.darkMode')}
               className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
             >
               {isDarkMode ? <SunIcon /> : <MoonIcon />}
@@ -130,7 +130,7 @@ function Header() {
               type="button"
               className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
               onClick={handleMenuToggle}
-              aria-label="메뉴 열기"
+              aria-label={t('common.openMenu')}
               aria-expanded={isMenuOpen}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

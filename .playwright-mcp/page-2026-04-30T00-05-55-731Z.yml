@@ -1,0 +1,48 @@
+- generic [ref=e2]:
+  - banner [ref=e53]:
+    - generic [ref=e55]:
+      - generic [ref=e56]: TodoList
+      - navigation [ref=e57]:
+        - link "할일 목록" [ref=e58] [cursor=pointer]:
+          - /url: /todos
+        - link "카테고리 관리" [ref=e59] [cursor=pointer]:
+          - /url: /categories
+      - generic [ref=e60]:
+        - combobox "언어 선택" [ref=e61]:
+          - option "한국어" [selected]
+          - option "English"
+          - option "日本語"
+        - generic [ref=e62]:
+          - button "다크 모드로 전환" [ref=e63] [cursor=pointer]:
+            - img [ref=e64]
+          - button "로그아웃" [ref=e66] [cursor=pointer]
+  - main [ref=e67]:
+    - generic [ref=e206]:
+      - generic [ref=e207]:
+        - heading "할일 목록" [level=1] [ref=e208]
+        - button "할일 등록" [ref=e209] [cursor=pointer]
+      - generic [ref=e211]:
+        - combobox "카테고리 필터" [ref=e212]:
+          - option "전체 카테고리" [selected]
+          - option "업무"
+        - combobox "상태 필터" [ref=e213]:
+          - option "전체" [selected]
+          - option "대기중"
+          - option "완료"
+          - option "기한초과"
+      - list [ref=e214]:
+        - listitem [ref=e215]:
+          - generic [ref=e217]:
+            - generic [ref=e218]:
+              - generic [ref=e219]:
+                - generic [ref=e220]: ● 대기중
+                - generic [ref=e221]: 업무
+                - generic [ref=e222]: Playwright MCP 테스트 보고서 작성 [수정완료]
+              - paragraph [ref=e223]: 다국어 i18n 적용 후 사용자 시나리오 검증
+            - generic [ref=e224]:
+              - button "완료" [ref=e225] [cursor=pointer]:
+                - img [ref=e226]
+              - button "수정" [ref=e228] [cursor=pointer]:
+                - img [ref=e229]
+              - button "삭제" [ref=e231] [cursor=pointer]:
+                - img [ref=e232]
