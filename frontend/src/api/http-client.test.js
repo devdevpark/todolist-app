@@ -42,7 +42,7 @@ describe('http-client', () => {
     });
   });
 
-  it('401 응답 시 clearAuth를 호출하고 /login으로 리다이렉트한다', async () => {
+  it('401 응답 시 clearAuth를 호출하고 auth:unauthorized 이벤트를 발송한다', async () => {
     useAuthStore.getState().setAuth({ token: 'expired-token', user: { id: 1 } });
     fetch.mockResolvedValueOnce({
       status: 401,
@@ -52,12 +52,15 @@ describe('http-client', () => {
       }),
     });
 
+    const dispatchSpy = vi.spyOn(window, 'dispatchEvent');
+
     await get('/api/todos');
 
     const { isAuthenticated, token } = useAuthStore.getState();
     expect(isAuthenticated).toBe(false);
     expect(token).toBeNull();
-    expect(window.location.href).toBe('/login');
+    expect(dispatchSpy).toHaveBeenCalledWith(expect.any(CustomEvent));
+    expect(dispatchSpy.mock.calls[0][0].type).toBe('auth:unauthorized');
   });
 
   it('토큰이 있을 때 Authorization 헤더가 포함된다', async () => {

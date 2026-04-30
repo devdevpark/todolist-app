@@ -36,7 +36,7 @@ async function request(method, path, { body, params } = {}) {
   if (!data.success) {
     if (response.status === 401) {
       useAuthStore.getState().clearAuth();
-      window.location.href = '/login';
+      window.dispatchEvent(new CustomEvent('auth:unauthorized'));
       return;
     }
 
