@@ -74,6 +74,11 @@
     "deleteConfirm": "Deleting this category will unassign it from associated todos. Continue?",
     "noCategory": "No Category"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you requested does not exist or has been moved.",
+    "goHome": "Go to Home"
+  },
   "admin": {
     "userManage": "User Management",
     "desc": "View all users and manage their status.",

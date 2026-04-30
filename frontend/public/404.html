@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - TodoList</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+        padding: 1rem;
+      }
+      .card {
+        width: 100%;
+        max-width: 28rem;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 2.5rem;
+        text-align: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      }
+      .code { font-size: 4.5rem; font-weight: 700; color: #6366f1; line-height: 1; margin-bottom: 1rem; }
+      h1 { font-size: 1.125rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem; }
+      p { font-size: 0.875rem; color: #6b7280; margin-bottom: 2rem; }
+      a {
+        display: inline-block;
+        padding: 0.625rem 1.5rem;
+        background: #6366f1;
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: opacity .15s;
+      }
+      a:hover { opacity: .85; }
+      @media (prefers-color-scheme: dark) {
+        body { background: #030712; }
+        .card { background: #111827; border-color: #1f2937; }
+        h1 { color: #f9fafb; }
+        p { color: #9ca3af; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <p class="code">404</p>
+      <h1>페이지를 찾을 수 없습니다</h1>
+      <p>요청하신 페이지가 존재하지 않거나 이동되었습니다.</p>
+      <a href="/">홈으로 돌아가기</a>
+    </div>
+  </body>
+</html>

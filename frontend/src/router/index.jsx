@@ -8,6 +8,7 @@ import TodoListPage from '@/pages/TodoListPage';
 import TodoFormPage from '@/pages/TodoFormPage';
 import CategoryPage from '@/pages/CategoryPage';
 import AdminUsersPage from '@/pages/AdminUsersPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 import { USER_ROLE } from '@/constants/user-role';
 
 function AppRouter() {
@@ -34,7 +35,7 @@ function AppRouter() {
         <Route index element={<AdminUsersPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/todos" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
